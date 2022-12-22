@@ -15,7 +15,7 @@ public class Blog {
 
     private String producer;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
 
     public Category getCategory() {

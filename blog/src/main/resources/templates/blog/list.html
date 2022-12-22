@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/blog/layout :: head">
 </head>
-<div>
+
     <h3>Welcom To Blog</h3>
     <p>
         <a th:href="@{/blog/create}">
             Add new blog
         </a>
     </p>
+<p th:text="${mess}"></p>
     <form th:action="@{/blog/search}" th:object="${searchBlog}" method="get">
         <tr>
             <td>Search by name</td>

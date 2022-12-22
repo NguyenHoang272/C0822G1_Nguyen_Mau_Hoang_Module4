@@ -24,9 +24,9 @@ public class BlogController {
 
 
     @GetMapping("/list")
-    public String showList(@RequestParam(defaultValue ="" ) String search, @PageableDefault(page = 0, size = 5) Pageable pageable, ModelMap model) {
+    public String showList(@RequestParam(defaultValue = "") String search, @PageableDefault(page = 0, size = 5) Pageable pageable, ModelMap model) {
         Page<Blog> blogList = blogService.findAll(pageable);
-        model.addAttribute("blogList",blogList);
+        model.addAttribute("blogList", blogList);
 
         return "/blog/list";
     }
@@ -35,15 +35,24 @@ public class BlogController {
     @GetMapping("/create")
     public String create(Model model) {
 
-        model.addAttribute("blog",new Blog());
+        model.addAttribute("blog", new Blog());
 
         return "/blog/create";
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Blog blog) {
+    public String create(@ModelAttribute Blog blog,RedirectAttributes redirectAttributes) {
+        List<Blog> blogs = blogService.findAll();
+        for (Blog items : blogs) {
+            if (blog.getName().equals(items.getName())) {
+                redirectAttributes.addFlashAttribute("mess", "Fail");
+                return "redirect:/blog/list";
+            }
+        }
         blogService.save(blog);
         return "redirect:/blog/list";
+
+
     }
 
     @GetMapping("/{id}/edit")
@@ -53,16 +62,25 @@ public class BlogController {
     }
 
     @PostMapping("/edit")
-    public String update(Blog blog,RedirectAttributes redirectAttributes) {
-        blogService.update(blog);
-        redirectAttributes.addFlashAttribute("success", "update new success");
+    public String update(Blog blog, RedirectAttributes redirectAttributes) {
+        List<Blog> blogs = blogService.findAll();
+        for (Blog items : blogs) {
+            if (blog.getName().equals(items.getName())) {
+                redirectAttributes.addFlashAttribute("mess", "Fail");
+                return "redirect:/blog/list";
+            }else {
+                blogService.update(blog);
+                redirectAttributes.addFlashAttribute("mess", "update new success");
+            }
+        }
+
         return "redirect:/blog/list";
     }
 
     @GetMapping("/delete")
     public String delete(@RequestParam int id, RedirectAttributes redirect) {
         blogService.remove(id);
-        redirect.addFlashAttribute("success", "Delete new success");
+        redirect.addFlashAttribute("mess", "Delete new success");
         return "redirect:/blog/list";
     }
 
