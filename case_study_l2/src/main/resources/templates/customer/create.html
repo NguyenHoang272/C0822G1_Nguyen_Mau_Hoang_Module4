@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>create customer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            background: url("https://bit.ly/3iE7las");
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div style="text-align: center">
+    <th:block th:if="${message}">
+        <p style="color: red;font-weight: bold" th:text="${message}"></p>
+    </th:block>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-3"></div>
+
+        <div style="background: lightgreen" class="col-lg-6 shadow-lg">
+            <form action="/customers/create" method="post" th:object="${customerDTO}">
+                <div class="mb-5 mt-3 text-center fst-italic">
+                    <h1>Add New Customer Form</h1>
+                </div>
+
+                <div class="mb-3">
+                    <label for="nameCustomer" class="form-label fw-bold fst-italic">Name Customer:</label>
+                    <input th:field="*{name}" type="text" class="form-control" id="nameCustomer"
+                           aria-describedby="nameError">
+                    <p style="color: red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="birthDayCustomer" class="form-label fw-bold fst-italic">Birth Day:</label>
+                    <input th:field="*{dateOfBirth}" type="date" class="form-control" id="birthDayCustomer"
+                           aria-describedby="dateOfBirthError">
+                    <p style="color: red" th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="genderCustomer" class="form-label fw-bold fst-italic">Gender:</label>
+                    <select th:field="*{gender}" id="genderCustomer" class="form-select"
+                            aria-label="Default select example">
+                        <option value="0">Female</option>
+                        <option value="1">Male</option>
+                        <option value="2">LGBT</option>
+                    </select>
+                    <p style="color: red" th:errors="*{gender}" th:if="${#fields.hasErrors('gender')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="idCard" class="form-label fw-bold fst-italic">Id Card:</label>
+                    <input th:field="*{idCard}" type="text" class="form-control" id="idCard"
+                           aria-describedby="idCardError">
+                    <p style="color: red" th:errors="*{idCard}" th:if="${#fields.hasErrors('idCard')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="phoneCustomer" class="form-label fw-bold fst-italic">Phone:</label>
+                    <input th:field="*{phoneNumber}" type="text" class="form-control" id="phoneCustomer"
+                           aria-describedby="phoneError">
+                    <p style="color: red" th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="emailCustomer" class="form-label fw-bold fst-italic">Email:</label>
+                    <input th:field="*{email}" type="text" class="form-control" id="emailCustomer"
+                           aria-describedby="emailError">
+                    <p style="color: red" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="customerType" class="form-label fw-bold fst-italic">Customer Type:</label>
+                    <select th:field="*{customerTypeId}" id="customerType" class="form-select"
+                            aria-label="Default select example">
+                        <option th:each="item : ${customerTypes}"
+                                th:value="${item.id}"
+                                th:text="${item.name}">
+                        </option>
+                    </select>
+                    <p style="color: red" th:errors="*{customerTypeId}"
+                       th:if="${#fields.hasErrors('customerTypeId')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address" class="form-label fw-bold fst-italic">Address:</label>
+                    <input th:field="*{address}" type="text" class="form-control" id="address"
+                           aria-describedby="addressError">
+                    <p style="color: red" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
+                </div>
+                <button type="submit" class="btn bg-warning mb-3 w-100">Add New Customer</button>
+                <button class="btn bg-warning mb-3 w-100"><a style="color: black ;text-align: center;text-decoration: none"
+                                                             href="/customers">Back to customer list</a></button>
+            </form>
+        </div>
+
+        <div class="col-lg-3"></div>
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
