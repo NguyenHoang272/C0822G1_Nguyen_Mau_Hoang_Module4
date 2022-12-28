@@ -13,8 +13,14 @@ public class Customer {
     private String name;
     private String dateOfBirth;
     private int gender;
+
+    @Column(unique = true)
     private String idCard;
+
+    @Column(unique = true)
     private String phoneNumber;
+
+    @Column(unique = true)
     private String email;
     private String address;
     @Column(columnDefinition = "int default 1")

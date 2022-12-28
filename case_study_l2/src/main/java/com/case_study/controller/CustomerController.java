@@ -34,40 +34,51 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ModelAndView list(@RequestParam(value = "nameSearch", defaultValue ="" ) String nameSearch,
-                             @RequestParam(value = "email",defaultValue =""  ) String email,
-                             @RequestParam(value = "customerType",defaultValue ="") String customerType,
-                             @PageableDefault(value = 5) Pageable pageable){
+    public ModelAndView list(@RequestParam(value = "nameSearch", defaultValue = "") String nameSearch,
+                             @RequestParam(value = "email", defaultValue = "") String email,
+                             @RequestParam(value = "customerType", defaultValue = "") String customerType,
+                             @PageableDefault(value = 5) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("customer/list");
         modelAndView.addObject("customers", customerService.search(nameSearch, email, customerType, pageable));
-        modelAndView.addObject("email",email);
+        modelAndView.addObject("email", email);
         modelAndView.addObject("customerType", customerType);
-        modelAndView.addObject("nameSearch",nameSearch);
+        modelAndView.addObject("nameSearch", nameSearch);
         return modelAndView;
     }
+
     @GetMapping("create")
-    public ModelAndView showCreate(){
-    ModelAndView modelAndView = new ModelAndView("customer/create");
-    modelAndView.addObject("customerDTO", new CustomerDTO());
-    return modelAndView;
+    public ModelAndView showCreate() {
+        ModelAndView modelAndView = new ModelAndView("customer/create");
+        modelAndView.addObject("customerDTO", new CustomerDTO());
+        return modelAndView;
     }
+
     @PostMapping("/create")
     private ModelAndView create(@Validated @ModelAttribute CustomerDTO customerDTO, BindingResult bindingResult) {
         new CustomerDTO().validate(customerDTO, bindingResult);
+        ModelAndView modelAndView = new ModelAndView("customer/create");
+        List<Customer> customers = customerService.findAll();
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getErrorCount());
-            ModelAndView modelAndView = new ModelAndView("customer/create");
             modelAndView.addObject("customerDTO", customerDTO);
             modelAndView.addObject("message", "Add new not success!");
             return modelAndView;
         }
-        Customer customer = new Customer();
-        BeanUtils.copyProperties(customerDTO, customer);
-        customerService.save(customer);
-        ModelAndView modelAndView = new ModelAndView("customer/create");
-        modelAndView.addObject("customerDTO", customerDTO);
-        modelAndView.addObject("message", "Add new Successful!");
+        for(Customer items: customers){
+            if (customerDTO.getEmail().equals(items.getEmail())){
+                modelAndView.addObject("message", "Dup!");
+                return modelAndView;
+            }else {
+                Customer customer = new Customer();
+                BeanUtils.copyProperties(customerDTO, customer);
+                customerService.save(customer);
+                modelAndView.addObject("customerDTO", customerDTO);
+                modelAndView.addObject("message", "Add new Successful!");
+                return modelAndView;
+            }
+        }
         return modelAndView;
+
     }
 
     @GetMapping("/delete")

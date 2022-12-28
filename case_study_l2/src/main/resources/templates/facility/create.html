@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>create customer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        body {
+            background: url("https://bit.ly/3iE7las");
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div style="text-align: center">
+    <th:block th:if="${message}">
+        <p style="color: red;font-weight: bold" th:text="${message}"></p>
+    </th:block>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-3"></div>
+
+        <div style="background: lightgreen" class="col-lg-6 shadow-lg">
+            <form action="/facility/create" method="post" th:object="${facilityDTO}">
+                <div class="mb-5 mt-3 text-center fst-italic">
+                    <h1>Add New Facility Form</h1>
+                </div>
+                <div class="mb-3">
+                    <label for="facilityType" class="form-label fw-bold fst-italic">Facility Type:</label>
+                    <select th:field="*{facilityTypeId}" id="facilityType" class="form-select"
+                            aria-label="Default select example">
+                        <option th:each="item : ${facilityTypeList}"
+                                th:value="${item.id}"
+                                th:text="${item.name}">
+                        </option>
+                    </select>
+                    <p style="color: red" th:errors="*{facilityTypeId}"
+                       th:if="${#fields.hasErrors('facilityTypeId')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-bold fst-italic">Name Facility:</label>
+                    <input th:field="*{name}" type="text" class="form-control" id="name" aria-describedby="nameError">
+                    <p style="color: red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="area" class="form-label fw-bold fst-italic">Area:</label>
+                    <input th:field="*{area}" type="text" class="form-control" id="area" aria-describedby="area">
+                    <p style="color: red" th:errors="*{area}" th:if="${#fields.hasErrors('area')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="cost" class="form-label fw-bold fst-italic">Cost:</label>
+                    <input th:field="*{cost}" type="text" class="form-control" id="cost" aria-describedby="cost">
+                    <p style="color: red" th:errors="*{cost}" th:if="${#fields.hasErrors('cost')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="maxPeople" class="form-label fw-bold fst-italic">Max People:</label>
+                    <input th:field="*{maxPeople}" type="text" class="form-control" id="maxPeople"
+                           aria-describedby="maxPeople">
+                    <p style="color: red" th:errors="*{maxPeople}" th:if="${#fields.hasErrors('maxPeople')}"></p>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="standardRoom" class="form-label fw-bold fst-italic">Standard Room:</label>
+                    <input th:field="*{standardRoom}" type="text" class="form-control" id="standardRoom"
+                           aria-describedby="standardRoom">
+                    <p style="color: red" th:errors="*{standardRoom}" th:if="${#fields.hasErrors('standardRoom')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descriptionOtherConvenience" class="form-label fw-bold fst-italic">Description Other
+                        Convenience:</label>
+                    <input th:field="*{descriptionOtherConvenience}" type="text" class="form-control"
+                           id="descriptionOtherConvenience" aria-describedby="descriptionOtherConvenience">
+                    <p style="color: red" th:errors="*{descriptionOtherConvenience}"
+                       th:if="${#fields.hasErrors('descriptionOtherConvenience')}"></p>
+                </div>
+
+
+                <div id="poolArea" class="mb-3">
+                    <label for="poolArea1" class="form-label fw-bold fst-italic">Pool Area:</label>
+                    <input th:field="*{poolArea}" type="text" class="form-control" id="poolArea1"
+                           aria-describedby="poolArea">
+                    <p style="color: red" th:errors="*{poolArea}" th:if="${#fields.hasErrors('poolArea')}"></p>
+                </div>
+
+                <div id="numberFloors" class="mb-3">
+                    <label for="numberFloors1" class="form-label fw-bold fst-italic">Number Floors:</label>
+                    <input th:field="*{numberFloors}" type="text" class="form-control" id="numberFloors1"
+                           aria-describedby="numberFloors">
+                    <p style="color: red" th:errors="*{numberFloors}" th:if="${#fields.hasErrors('numberFloors')}"></p>
+                </div>
+
+                <div id="facilityFree" class="mb-3">
+                    <label for="facilityFree1" class="form-label fw-bold fst-italic">Facility Free:</label>
+                    <input th:field="*{facilityFree}" type="text" class="form-control" id="facilityFree1"
+                           aria-describedby="facilityFree">
+                    <p style="color: red" th:errors="*{facilityFree}" th:if="${#fields.hasErrors('facilityFree')}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="rentTypeId" class="form-label fw-bold fst-italic">Rent Type:</label>
+                    <select th:field="*{rentTypeId}" id="rentTypeId" class="form-select"
+                            aria-label="Default select example">
+                        <option th:each="item : ${rentTypeList}"
+                                th:value="${item.id}"
+                                th:text="${item.name}">
+                        </option>
+                    </select>
+                    <p style="color: red" th:errors="*{rentTypeId}" th:if="${#fields.hasErrors('rentTypeId')}"></p>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3 w-100">Add New Facility</button>
+                <button class="btn bg-warning mb-3 w-100"><a style="color: black ;text-align: center;text-decoration: none"
+                                                             href="/facility">Back to customer list</a></button>
+            </form>
+        </div>
+
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        idFacilityType();
+
+    })
+
+    function idFacilityType() {
+        let idFacilityType = $('#facilityType').val();
+        if (idFacilityType === '1') {
+            $('#facilityFree').hide();
+            $('#poolArea').show();
+            $('#numberFloors').show();
+        }
+        if (idFacilityType === '2') {
+            $('#facilityFree').hide();
+            $('#poolArea').hide();
+            $('#numberFloors').show();
+        }
+        if (idFacilityType === '3') {
+            $('#poolArea').hide();
+            $('#numberFloors').hide();
+            $('#facilityFree').show();
+        }
+    }
+
+    $('#facilityFree').hide();
+    $('#poolArea').show();
+    $('#numberFloors').show();
+
+    $('#facilityType').change(function () {
+        if ($(this).val() === '1') {
+            $('#facilityFree').hide();
+            $('#poolArea').show();
+            $('#numberFloors').show();
+            $('#facilityFree1').val("");
+        }
+        if ($(this).val() === '2') {
+            $('#facilityFree').hide();
+            $('#poolArea').hide();
+            $('#numberFloors').show();
+            $('#poolArea1').val("0");
+            $('#facilityFree1').val("");
+        }
+        if ($(this).val() === '3') {
+            $('#poolArea').hide();
+            $('#numberFloors').hide();
+            $('#facilityFree').show();
+            $('#poolArea1').val("0")
+            $('#numberFloors1').val("0")
+        }
+    });
+</script>
+</body>
+</html>

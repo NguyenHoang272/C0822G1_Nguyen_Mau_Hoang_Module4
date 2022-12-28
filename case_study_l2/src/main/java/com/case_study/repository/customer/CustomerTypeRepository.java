@@ -1,4 +1,4 @@
-package com.case_study.repository;
+package com.case_study.repository.customer;
 
 
 import com.case_study.model.CustomerType;
