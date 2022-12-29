@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>create customer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: url("https://bit.ly/3iE7las");
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div style="text-align: center">
+    <th:block th:if="${message}">
+        <p style="color: red;font-weight: bold" th:text="${message}"></p>
+    </th:block>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-3"></div>
+
+        <div style="background: lightblue" class="col-lg-6 shadow-lg">
+            <form action="/contract/create"  method="post" th:object="${contractDTO}">
+                <div class="mb-5 mt-3 text-center fst-italic">
+                    <h1>Add New Contract Form</h1>
+                </div>
+
+                <div class="mb-3">
+                    <label for="facility" class="form-label fw-bold fst-italic">Facility Name:</label>
+                    <select th:field="*{facilityId}" id="facility"  class="form-select" aria-label="Default select example">
+                        <option th:each="item : ${facilityList}"
+                                th:value="${item.id}"
+                                th:text="${item.name}">
+                        </option>
+                    </select>
+                    <p style="color: red" th:errors="*{facilityId}" th:if="${#fields.hasErrors('facilityId')}"> </p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="startDay" class="form-label fw-bold fst-italic">Start Day:</label>
+                    <input th:field="*{dateStart}" type="date" class="form-control" id="startDay" aria-describedby="dateStart">
+                    <p style="color: red" th:errors="*{dateStart}" th:if="${#fields.hasErrors('dateStart')}"> </p>
+                </div>
+                <div class="mb-3">
+                    <label for="endDay" class="form-label fw-bold fst-italic">End Day:</label>
+                    <input th:field="*{dateEnd}" type="date" class="form-control" id="endDay" aria-describedby="dateEnd">
+                    <p style="color: red" th:errors="*{dateEnd}" th:if="${#fields.hasErrors('dateEnd')}"> </p>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="deposit" class="form-label fw-bold fst-italic">Deposit: </label>
+                    <input th:field="*{deposit}" type="number" class="form-control" id="deposit" aria-describedby="deposit">
+                    <p style="color: red" th:errors="*{deposit}" th:if="${#fields.hasErrors('deposit')}"> </p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="totalPrice" class="form-label fw-bold fst-italic">Total Price: </label>
+                    <input th:field="*{totalPrice}" type="text" class="form-control" id="totalPrice" aria-describedby="totalPrice" disabled>
+                </div>
+
+                <div class="mb-3">
+                    <label for="employeeId" class="form-label fw-bold fst-italic">Employee Name:</label>
+                    <select th:field="*{employeeId}" id="employeeId" class="form-select" aria-label="Default select example">
+                        <option th:each="item : ${employeeList}"
+                                th:value="${item.id}"
+                                th:text="${item.name}">
+                        </option>
+                    </select>
+                    <p style="color: red" th:errors="*{employeeId}" th:if="${#fields.hasErrors('employeeId')}"> </p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="customerId" class="form-label fw-bold fst-italic">Customer Name:</label>
+                    <select th:field="*{customerId}" id="customerId" class="form-select" aria-label="Default select example">
+                        <option th:each="item : ${customerList}"
+                                th:value="${item.id}"
+                                th:text="${item.name}">
+                        </option>
+                    </select>
+                    <p style="color: red" th:errors="*{customerId}" th:if="${#fields.hasErrors('customerId')}"> </p>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3 w-100">Add New Contract</button>
+                <button class="btn bg-warning mb-3 w-100"><a style="color: black ;text-align: center;text-decoration: none"
+                                                             href="/contract">Back to customer list</a></button>
+            </form>
+        </div>
+
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        totalPrice();
+    })
+
+    $('#facility').change(function () {
+        totalPrice();
+    });
+
+    function totalPrice() {
+        let id = $('#facility').val();
+        $.ajax({
+            url: "http://localhost:8080/api/contract/v1/" + id,
+            type: "GET",
+            contentType: "application/json; charset =utf-8",
+            dataType: "json",
+            success: function (data) {
+                $('#totalPrice').val(data.cost);
+            }
+        })
+    }
+</script>
+</body>
+
+</body>
+</html>

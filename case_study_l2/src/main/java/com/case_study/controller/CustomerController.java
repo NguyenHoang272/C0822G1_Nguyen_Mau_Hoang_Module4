@@ -67,7 +67,7 @@ public class CustomerController {
         for(Customer items: customers){
             if (customerDTO.getEmail().equals(items.getEmail())){
                 modelAndView.addObject("message", "Dup!");
-                return modelAndView;
+                break;
             }else {
                 Customer customer = new Customer();
                 BeanUtils.copyProperties(customerDTO, customer);
