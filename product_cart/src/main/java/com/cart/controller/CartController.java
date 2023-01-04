@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 @RequestMapping("/cart")
 public class CartController {
     @GetMapping
-        public String showCart(@SessionAttribute(value = "cart", required = false) CartDto cart, Model model){
-            model.addAttribute("cart",cart);
-            return "views/cart/list";
+    public String showCart(@SessionAttribute(value = "cart", required = false) CartDto cart, Model model) {
+        model.addAttribute("cart", cart);
+        return "views/cart/list";
     }
 
 //    @GetMapping("/{id}/remove")

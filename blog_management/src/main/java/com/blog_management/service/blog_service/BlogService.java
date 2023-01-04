@@ -42,7 +42,8 @@ public class BlogService implements IBlogService {
     }
 
     @Override
-    public void remove(Integer id) { blogRepository.deleteById(id);
+    public void remove(Integer id) {
+        blogRepository.deleteById(id);
     }
 
     @Override

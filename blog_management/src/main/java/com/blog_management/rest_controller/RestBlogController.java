@@ -22,8 +22,8 @@ public class RestBlogController {
     IBlogService blogService;
 
     @GetMapping("")
-    public ResponseEntity<Page<Blog>> showList(@PageableDefault(value = 0, size = 5,sort = {"author"})
-                                                           Pageable pageable) {
+    public ResponseEntity<Page<Blog>> showList(@PageableDefault(value = 0, size = 5, sort = {"author"})
+                                                       Pageable pageable) {
         Page<Blog> blogList = blogService.findPageable(pageable);
         if (blogList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -41,31 +41,31 @@ public class RestBlogController {
     }
 
     @PostMapping("create")
-    public ResponseEntity<Blog> create(@RequestBody Blog blog){
+    public ResponseEntity<Blog> create(@RequestBody Blog blog) {
 //        blog.setCategory(categoryService.findById(blog.getCategory().getId()));
         blogService.save(blog);
         Blog blog1 = blogService.findById(blog.getId());
         return new ResponseEntity<>(blog1, HttpStatus.CREATED);
     }
 
-    @PutMapping(path="/update/{id}")
-    public  ResponseEntity update(@PathVariable("id")int id, @RequestBody Blog blog){
+    @PutMapping(path = "/update/{id}")
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody Blog blog) {
         Blog blog2 = blogService.findById(id);
         if (blog == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         blogService.update(blog);
-        return new ResponseEntity<>(blog2,HttpStatus.OK);
+        return new ResponseEntity<>(blog2, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Blog> delete(@PathVariable("id") int id){
+    public ResponseEntity<Blog> delete(@PathVariable("id") int id) {
         Blog blog = blogService.findById(id);
-        if(blog == null){
+        if (blog == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         blogService.remove(id);
-        return new ResponseEntity<>(blog,HttpStatus.OK);
+        return new ResponseEntity<>(blog, HttpStatus.OK);
     }
 
     @GetMapping("/search/{category_id}")

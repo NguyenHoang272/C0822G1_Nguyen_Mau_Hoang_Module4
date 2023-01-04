@@ -39,9 +39,10 @@
                 <a class="btn btn-warning" th:href="@{/blog/edit/__${blog.id}__}">Edit</a>
             </td>
             <td>
-            <button th:attr="onclick=|getNameId('${blog.id}','${blog.title}')|" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                Remove
-            </button>
+                <button th:attr="onclick=|getNameId('${blog.id}','${blog.title}')|" type="button"
+                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Remove
+                </button>
             </td>
         </tr>
 
@@ -71,9 +72,9 @@
 </div>
 </body>
 <script th:inline="javascript">
-    function getNameId(id, name){
-        document.getElementById("deleteId").value=id;
-        document.getElementById("deleteName").innerText=name;
+    function getNameId(id, name) {
+        document.getElementById("deleteId").value = id;
+        document.getElementById("deleteName").innerText = name;
     }
 </script>
 </html>

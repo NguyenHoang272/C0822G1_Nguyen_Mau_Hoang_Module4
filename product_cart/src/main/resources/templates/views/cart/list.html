@@ -14,7 +14,8 @@
 
     <div class="row">
         <div class="col-md-8">
-            <table class="table table-light table-striped table-bordered" th:if="${cart !=null && cart.getProductMap().size()>0}">
+            <table class="table table-light table-striped table-bordered"
+                   th:if="${cart !=null && cart.getProductMap().size()>0}">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -39,23 +40,23 @@
                     <td th:text="${productMap.key.price * productMap.value}"></td>
                     <td>
                         <a th:href="@{/shop/add/__${productMap.key.id}__}">
-                            <button class="btn btn-primary"> + </button>
+                            <button class="btn btn-primary"> +</button>
                         </a>
                     </td>
                     <td>
                         <a th:href="@{/shop/decrease/__${productMap.key.id}__}">
-                            <button class="btn btn-warning"> - </button>
+                            <button class="btn btn-warning"> -</button>
                         </a>
                     </td>
                     <td>
                         <a th:href="@{/shop/delete/__${productMap.key.id}__}">
-                            <button class="btn btn-danger"> x </button>
+                            <button class="btn btn-danger"> x</button>
                         </a>
                     </td>
                 </tr>
 
                 <tr>
-                    <td> - </td>
+                    <td> -</td>
                     <th colspan="4">Tổng tiền của giỏ hàng:</th>
                     <th th:text="${cart.countTotalPayment()}"></th>
                     <td colspan="3"></td>

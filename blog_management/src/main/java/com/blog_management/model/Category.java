@@ -14,7 +14,7 @@ public class Category {
     private int id;
     private String name;
 
-//    @JsonIgnore
+    //    @JsonIgnore
     @JsonBackReference
     @OneToMany(mappedBy = "category")
     private Set<Blog> blogs;

@@ -6,8 +6,12 @@ import java.util.List;
 
 public interface IBookService {
     List<Book> finAll();
-    void save (Book book);
+
+    void save(Book book);
+
     Book finById(Integer id);
+
     void update(Book book);
+
     void remove(Book book);
 }

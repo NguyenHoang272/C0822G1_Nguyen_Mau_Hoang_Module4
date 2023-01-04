@@ -64,11 +64,11 @@ public class CustomerController {
             modelAndView.addObject("message", "Add new not success!");
             return modelAndView;
         }
-        for(Customer items: customers){
-            if (customerDTO.getEmail().equals(items.getEmail())){
+        for (Customer items : customers) {
+            if (customerDTO.getEmail().equals(items.getEmail())) {
                 modelAndView.addObject("message", "Dup!");
                 break;
-            }else {
+            } else {
                 Customer customer = new Customer();
                 BeanUtils.copyProperties(customerDTO, customer);
                 customerService.save(customer);

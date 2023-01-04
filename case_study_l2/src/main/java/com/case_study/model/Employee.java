@@ -25,19 +25,19 @@ public class Employee {
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonBackReference
     @JsonIgnore
-    @JoinColumn(name = "position_id",referencedColumnName = "id")
+    @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position positionId;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonBackReference
     @JsonIgnore
-    @JoinColumn(name = "division_id",referencedColumnName = "id")
+    @JoinColumn(name = "division_id", referencedColumnName = "id")
     private Division divisionId;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonBackReference
     @JsonIgnore
-    @JoinColumn(name = "education_degree_id",referencedColumnName = "id")
+    @JoinColumn(name = "education_degree_id", referencedColumnName = "id")
     private EducationDegree educationDegreeId;
 
 

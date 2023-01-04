@@ -35,12 +35,12 @@ public class SongController {
     @PostMapping("/create")
     public String create(@Validated @ModelAttribute SongDto songDto,
                          BindingResult bindingResult, Model model,
-                         RedirectAttributes redirectAttributes ) {
+                         RedirectAttributes redirectAttributes) {
 //        new SongDto().validate(songDto, bindingResult);
 //        lấy dữ liệu từ songdto qua song bởi vì chỉ entity mới thao tác dc với dữ liệu
         if (!bindingResult.hasErrors()) {
             Song song = new Song();
-            BeanUtils.copyProperties(songDto,song);
+            BeanUtils.copyProperties(songDto, song);
             songService.save(song);
             redirectAttributes.addFlashAttribute("message", "Added song successfully");
             return "redirect:/";
@@ -60,14 +60,14 @@ public class SongController {
     }
 
     @PostMapping("/edit")
-    public String edit(@Validated @ModelAttribute("songDto") SongDto songDto, BindingResult bindingResult, Model model){
-        if(!bindingResult.hasErrors()){
+    public String edit(@Validated @ModelAttribute("songDto") SongDto songDto, BindingResult bindingResult, Model model) {
+        if (!bindingResult.hasErrors()) {
             Song song = new Song();
             BeanUtils.copyProperties(songDto, song);
             songService.save(song);
             model.addAttribute("message", "Create new song successfully");
             return "redirect:/";
-        }else {
+        } else {
             model.addAttribute("message", "Create new song failure");
             return "song/edit";
         }

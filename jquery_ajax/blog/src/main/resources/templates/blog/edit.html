@@ -30,7 +30,8 @@
             <td>Category:</td>
             <td>
                 <select th:field="*{category}">
-                    <option th:each="item : ${categoryList}" th:value="${item.id}" th:text="${item.categoryName}"></option>
+                    <option th:each="item : ${categoryList}" th:value="${item.id}"
+                            th:text="${item.categoryName}"></option>
                 </select>
             </td>
         </tr>
@@ -38,7 +39,7 @@
         <tr>
             <td>Date:</td>
             <td>
-                <input type="date" th:field="*{dateCreated}" />
+                <input type="date" th:field="*{dateCreated}"/>
             </td>
         </tr>
 

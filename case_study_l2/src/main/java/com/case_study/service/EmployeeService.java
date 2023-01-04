@@ -13,10 +13,12 @@ import java.util.List;
 public class EmployeeService implements IEmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
+
     @Override
     public Page<Employee> findAll(Pageable pageable) {
         return employeeRepository.getListEmployee(pageable);
     }
+
     @Override
     public List<Employee> getListEmployee() {
         return employeeRepository.findAll();

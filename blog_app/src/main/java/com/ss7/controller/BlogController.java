@@ -19,13 +19,13 @@ public class BlogController {
     private IBlogService blogService;
     private ICategoryService categoryService;
 
-    public BlogController(BlogService blogService, CategoryService categoryService){
+    public BlogController(BlogService blogService, CategoryService categoryService) {
         this.blogService = blogService;
         this.categoryService = categoryService;
     }
 
     @GetMapping("create")
-    public String showCreateForm(Model model){
+    public String showCreateForm(Model model) {
         model.addAttribute("blog", new Blog());
         Iterable<Category> categoryList = categoryService.findAll();
         model.addAttribute("categoryList", categoryList);
@@ -33,7 +33,7 @@ public class BlogController {
     }
 
     @PostMapping("create")
-    public String saveBlog(@ModelAttribute("blog")Blog blog, Model model){
+    public String saveBlog(@ModelAttribute("blog") Blog blog, Model model) {
         blogService.save(blog);
         model.addAttribute("blog", new Blog());
         model.addAttribute("mess", "New blog created successfully");
@@ -41,15 +41,16 @@ public class BlogController {
     }
 
     @GetMapping("")
-    public String showList(@RequestParam(defaultValue = "")String search, Model model){
+    public String showList(@RequestParam(defaultValue = "") String search, Model model) {
         List<Blog> blogList = blogService.findByTitleContainingOrAuthor(search, search);
         model.addAttribute("blogList", blogList);
         return "/blog/list";
     }
+
     @GetMapping("edit/{id}")
-    public String showEditForm(@PathVariable("id")Integer id, Model model){
+    public String showEditForm(@PathVariable("id") Integer id, Model model) {
         Optional<Blog> blog = blogService.findById(id);
-        if (blog.isPresent()){
+        if (blog.isPresent()) {
             model.addAttribute("blog", blog.get());
             Iterable<Category> categoryList = categoryService.findAll();
             model.addAttribute("categoryList", categoryList);
@@ -59,22 +60,23 @@ public class BlogController {
     }
 
     @PostMapping("edit")
-    public String editBlog(@ModelAttribute("blog")Blog blog){
+    public String editBlog(@ModelAttribute("blog") Blog blog) {
         blogService.save(blog);
         return "redirect:/blog";
     }
 
     @GetMapping("detail/{id}")
-    public String detail(@PathVariable("id")Integer id, Model model){
+    public String detail(@PathVariable("id") Integer id, Model model) {
         Optional<Blog> blog = blogService.findById(id);
-        if (blog.isPresent()){
+        if (blog.isPresent()) {
             model.addAttribute("blog", blog.get());
             return "/blog/detail";
         }
         return "/blog";
     }
+
     @PostMapping("remove")
-    public String removeBlog(Integer id){
+    public String removeBlog(Integer id) {
         blogService.remove(id);
         return "redirect:/blog";
     }

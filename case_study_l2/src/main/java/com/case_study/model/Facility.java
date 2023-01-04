@@ -26,13 +26,13 @@ public class Facility {
     @ManyToOne
     @JsonBackReference
     @JsonIgnore
-    @JoinColumn(name = "rent_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "rent_type_id", referencedColumnName = "id")
     private RentType rentTypeId;
 
     @ManyToOne
     @JsonBackReference
     @JsonIgnore
-    @JoinColumn(name = "facility_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "facility_type_id", referencedColumnName = "id")
     private FacilityType facilityTypeId;
 
     @OneToMany(mappedBy = "facilityId")

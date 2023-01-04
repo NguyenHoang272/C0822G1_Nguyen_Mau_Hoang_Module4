@@ -29,7 +29,7 @@ public class Customer {
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonBackReference
     @JsonIgnore
-    @JoinColumn(name = "customer_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
     private CustomerType customerTypeId;
 
     public Customer() {

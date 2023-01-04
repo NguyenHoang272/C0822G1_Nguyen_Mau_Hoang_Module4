@@ -41,7 +41,7 @@ public class BlogController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Blog blog,RedirectAttributes redirectAttributes) {
+    public String create(@ModelAttribute Blog blog, RedirectAttributes redirectAttributes) {
         List<Blog> blogs = blogService.findAll();
         for (Blog items : blogs) {
             if (blog.getName().equals(items.getName())) {
@@ -68,7 +68,7 @@ public class BlogController {
             if (blog.getName().equals(items.getName())) {
                 redirectAttributes.addFlashAttribute("mess", "Fail");
                 return "redirect:/blog/list";
-            }else {
+            } else {
                 blogService.update(blog);
                 redirectAttributes.addFlashAttribute("mess", "update new success");
             }

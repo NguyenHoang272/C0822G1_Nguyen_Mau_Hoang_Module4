@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-public interface FacilityRepository extends JpaRepository<Facility,Integer> {
+public interface FacilityRepository extends JpaRepository<Facility, Integer> {
     @Query(value = "select f.* from `facility` f join `facility_type` ft " +
             "on f.facility_type_id = ft.id " +
             "where f.name like %:name% and ft.name like %:type% and f.delete_status= 1", nativeQuery = true)
     Page<Facility> search(@Param("name") String nameSearch,
-                          @Param("type")  String facilityType,
+                          @Param("type") String facilityType,
                           Pageable pageable);
 
     @Transactional

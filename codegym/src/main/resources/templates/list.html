@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th sec:authorize="hasRole('ADMIN')">Edit</th>
+    </tr>
+    <tr th:each="data, stt: ${productList}">
+        <td th:text="${stt.count}"></td>
+        <td th:text="${data.name}"></td>
+        <td sec:authorize="hasRole('ADMIN')" ><a href="">Edit</a></td>
+    </tr>
+</table>
+</body>
+</html>

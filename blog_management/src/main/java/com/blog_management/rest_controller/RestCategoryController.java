@@ -23,10 +23,11 @@ public class RestCategoryController {
 
     @Autowired
     private IBlogService blogService;
+
     @GetMapping
-    public ResponseEntity<List<Category>> list(){
+    public ResponseEntity<List<Category>> list() {
         List<Category> categoryList = categoryService.findAll();
-        if (categoryList.isEmpty()){
+        if (categoryList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(categoryList, HttpStatus.OK);

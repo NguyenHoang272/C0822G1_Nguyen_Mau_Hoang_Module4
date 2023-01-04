@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContractRestController {
     @Autowired
     IFacilityService facilityService;
+
     @GetMapping("/{id}")
     public ResponseEntity<Facility> getFacilityById(@PathVariable int id) {
         Facility facility = facilityService.findFacilityByID(id);

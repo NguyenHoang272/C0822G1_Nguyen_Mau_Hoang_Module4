@@ -10,7 +10,7 @@ public class Book {
     private Integer id;
     private String title;
     private Integer quantity;
-    private Integer  stock;
+    private Integer stock;
 
     @OneToMany(mappedBy = "book")
     private Set<BookOrder> bookOrders;

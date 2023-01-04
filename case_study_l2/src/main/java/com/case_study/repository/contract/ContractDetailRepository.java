@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ContractDetailRepository extends JpaRepository<ContractDetail,Integer> {
+public interface ContractDetailRepository extends JpaRepository<ContractDetail, Integer> {
 
     @Query(value = "select * from contract_detail where contract_id = :id", nativeQuery = true)
     List<ContractDetail> findList(@Param("id") int id);

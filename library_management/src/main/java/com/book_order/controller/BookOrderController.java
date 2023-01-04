@@ -21,18 +21,19 @@ public class BookOrderController {
     @Autowired
     private IOrderService oderService;
 
-@GetMapping("/")
-    public String showList(Model model){
-    model.addAttribute("books",bookService.finAll());
-    return"book/list";
-}
+    @GetMapping("/")
+    public String showList(Model model) {
+        model.addAttribute("books", bookService.finAll());
+        return "book/list";
+    }
 
-@GetMapping("/order/{id}")
-    public String showOder(@PathVariable int id, Model model){
-    Book book = bookService.finById(id);
-    model.addAttribute("book",book);
-    return "/book/oder_form";
-}
+    @GetMapping("/order/{id}")
+    public String showOder(@PathVariable int id, Model model) {
+        Book book = bookService.finById(id);
+        model.addAttribute("book", book);
+        return "/book/oder_form";
+    }
+
     @PostMapping("/order")
     public String order(@RequestParam Integer id, Model model) {
 

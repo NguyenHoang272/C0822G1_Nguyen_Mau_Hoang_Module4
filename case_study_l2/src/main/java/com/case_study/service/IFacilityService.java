@@ -10,11 +10,18 @@ import java.util.List;
 
 public interface IFacilityService {
     Page<Facility> search(String nameSearch, String facilityType, Pageable pageable);
+
     List<FacilityType> findAllFacilityType();
+
     List<RentType> findAllRentType();
+
     void save(Facility facility);
+
     FacilityType findByIdFacilityType(int facilityType);
+
     Facility findFacilityByID(int id);
+
     void delete(int id);
+
     List<Facility> findAll();
 }

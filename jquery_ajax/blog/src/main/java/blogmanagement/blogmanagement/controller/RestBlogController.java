@@ -32,7 +32,7 @@ public class RestBlogController {
 
     @GetMapping("")
     public ResponseEntity<List<Blog>> showList(@PageableDefault(value = 1, sort = "date_created", direction = Sort.Direction.DESC)
-                                               Pageable pageable) {
+                                                       Pageable pageable) {
         Page<Blog> blogList = blogService.findPageable(pageable);
 
         if (blogList.isEmpty()) {
@@ -44,7 +44,7 @@ public class RestBlogController {
 
     @GetMapping("/search")
     public ResponseEntity<List<Blog>> showList(@RequestParam(value = "search")
-                                               String search) {
+                                                       String search) {
 
         List<Blog> blogList = blogService.findByTitleContaining(search);
         if (blogList.isEmpty()) {

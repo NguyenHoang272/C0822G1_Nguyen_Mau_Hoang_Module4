@@ -34,9 +34,10 @@
         </div>
         <div class="mb-3">
             <label th:for="category" class="form-label">Category</label>
-<!--            <input type="date" class="form-control" th:field="*{writingDate}" placeholder="Writing Of Date">-->
+            <!--            <input type="date" class="form-control" th:field="*{writingDate}" placeholder="Writing Of Date">-->
             <select th:field="*{category}" class="form-control">
-            <option th:each="category:${categoryList}" th:value="${category.id}" th:text="${category.categoryName}"></option>
+                <option th:each="category:${categoryList}" th:value="${category.id}"
+                        th:text="${category.categoryName}"></option>
             </select>
         </div>
         <button type="submit" class="btn btn-success">Create</button>

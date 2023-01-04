@@ -130,6 +130,7 @@ public class ContractDTO implements Validator {
     public void setContractDetailSet(Set<ContractDetail> contractDetailSet) {
         this.contractDetailSet = contractDetailSet;
     }
+
     public void getTotalCost() {
         this.totalPrice = this.facilityId.getCost();
         if (this.contractDetailSet != null) {
@@ -138,6 +139,7 @@ public class ContractDTO implements Validator {
             }
         }
     }
+
     @Override
     public boolean supports(Class<?> clazz) {
         return false;
@@ -145,6 +147,6 @@ public class ContractDTO implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        ContractDTO contractDTO =(ContractDTO) target;
+        ContractDTO contractDTO = (ContractDTO) target;
     }
 }

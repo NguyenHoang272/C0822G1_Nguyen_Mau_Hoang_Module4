@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface ISongService {
     Page<Song> finAll(Pageable pageable);
-    void save (Song song);
+
+    void save(Song song);
+
     Song findById(Integer id);
 }

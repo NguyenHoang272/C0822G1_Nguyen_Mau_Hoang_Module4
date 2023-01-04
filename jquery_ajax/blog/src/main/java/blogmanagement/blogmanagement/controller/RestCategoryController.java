@@ -16,15 +16,16 @@ public class RestCategoryController {
     private ICategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<Category>> getCategoryList(){
+    public ResponseEntity<List<Category>> getCategoryList() {
         List<Category> categoryList = categoryService.findAll();
-        if(categoryList.isEmpty()){
+        if (categoryList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(categoryList,HttpStatus.OK);
+        return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
+
     @PostMapping("/create")
-    public ResponseEntity<Category> addCategory(@RequestBody Category category){
+    public ResponseEntity<Category> addCategory(@RequestBody Category category) {
         categoryService.save(category);
         return new ResponseEntity<>(HttpStatus.OK);
     }

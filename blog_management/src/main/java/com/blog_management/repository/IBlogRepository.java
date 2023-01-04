@@ -18,7 +18,6 @@ public interface IBlogRepository extends JpaRepository<Blog, Integer> {
                                      @Param("limit") int limit);
 
 
-
     Page<Blog> findByTitleContaining(String searchTitle, Pageable pageable);
 
 
@@ -28,6 +27,7 @@ public interface IBlogRepository extends JpaRepository<Blog, Integer> {
     Page<Blog> findByTitleAndCategory(@Param("title") String title, @Param("category") String category, Pageable pageable);
 
     List<Blog> findByCategory(Category categoryId);
+
     @Query(value = "select * from Blog", nativeQuery = true)
     Page<Blog> findPageable(Pageable pageable);
 

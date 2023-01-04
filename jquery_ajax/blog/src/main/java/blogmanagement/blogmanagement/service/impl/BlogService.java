@@ -73,7 +73,7 @@ public class BlogService implements IBlogService {
     }
 
     @Override
-    public   List<Blog> findByTitleContaining(String title) {
+    public List<Blog> findByTitleContaining(String title) {
         return iBlogRepository.findByTitleContaining(title);
     }
 

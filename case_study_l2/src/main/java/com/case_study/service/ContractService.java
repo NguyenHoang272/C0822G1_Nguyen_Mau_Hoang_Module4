@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ContractService implements IContractService{
+public class ContractService implements IContractService {
     @Autowired
     ContractRepository contractRepository;
 
@@ -25,6 +25,7 @@ public class ContractService implements IContractService{
 
     @Autowired
     ContractDetailRepository contractDetailRepository;
+
     @Override
     public Page<Contract> findAll(Pageable pageable) {
         return contractRepository.getList(pageable);
@@ -67,7 +68,7 @@ public class ContractService implements IContractService{
 
     @Override
     public ContractDetail findContractDetailId(int attachId, int contractId) {
-        return contractDetailRepository.findContractDetailId(attachId,contractId);
+        return contractDetailRepository.findContractDetailId(attachId, contractId);
     }
 
     @Override

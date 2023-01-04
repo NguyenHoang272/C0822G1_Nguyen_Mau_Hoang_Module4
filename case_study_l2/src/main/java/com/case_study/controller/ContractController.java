@@ -43,6 +43,7 @@ public class ContractController {
     public List<AttachFacility> getListAttachFacility() {
         return contractService.getAttachFacilities();
     }
+
     @ModelAttribute("contractDetailList")
     public List<ContractDetail> getListContractDetail() {
         return contractService.getListContractDetail();
@@ -64,7 +65,7 @@ public class ContractController {
     }
 
     @GetMapping("")
-    public String showList(Model model, @PageableDefault(value =5 )Pageable pageable){
+    public String showList(Model model, @PageableDefault(value = 5) Pageable pageable) {
         Page<Contract> contractPage = contractService.findAll(pageable);
 
         Page<ContractDTO> contractDTOPage = contractPage.map(new Function<Contract, ContractDTO>() {
@@ -82,16 +83,16 @@ public class ContractController {
     }
 
     @GetMapping("create")
-    public ModelAndView showCreate(){
-    ModelAndView modelAndView = new ModelAndView("/contract/create");
-    modelAndView.addObject("contractDTO", new ContractDTO());
-    return modelAndView;
+    public ModelAndView showCreate() {
+        ModelAndView modelAndView = new ModelAndView("/contract/create");
+        modelAndView.addObject("contractDTO", new ContractDTO());
+        return modelAndView;
     }
 
     @PostMapping("/create")
-    private ModelAndView createContract(@Validated @ModelAttribute ContractDTO contractDTO, BindingResult bindingResult){
+    private ModelAndView createContract(@Validated @ModelAttribute ContractDTO contractDTO, BindingResult bindingResult) {
         new ContractDTO().validate(contractDTO, bindingResult);
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getErrorCount());
             ModelAndView modelAndView = new ModelAndView("/contract/create");
             modelAndView.addObject("contractDTO", contractDTO);
@@ -99,13 +100,14 @@ public class ContractController {
             return modelAndView;
         }
         Contract contract = new Contract();
-        BeanUtils.copyProperties(contractDTO,contract);
+        BeanUtils.copyProperties(contractDTO, contract);
         contractService.save(contract);
         ModelAndView modelAndView = new ModelAndView("/contract/create");
         modelAndView.addObject("contractDTO", contractDTO);
         modelAndView.addObject("message", "Add new successful ");
         return modelAndView;
     }
+
     @GetMapping("/use-facility")
     public ModelAndView showCustomerListUseFacility(@PageableDefault(value = 3) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("customer/customer_use_facility");

@@ -16,13 +16,13 @@ public class ContractDetail {
     @ManyToOne
     @JsonBackReference
     @JsonIgnore
-    @JoinColumn(name = "contract_id",referencedColumnName = "id")
+    @JoinColumn(name = "contract_id", referencedColumnName = "id")
     private Contract contractId;
 
     @ManyToOne
     @JsonBackReference
     @JsonIgnore
-    @JoinColumn(name = "attach_facility_id",referencedColumnName = "id")
+    @JoinColumn(name = "attach_facility_id", referencedColumnName = "id")
     private AttachFacility attachFacilityId;
 
     public ContractDetail() {

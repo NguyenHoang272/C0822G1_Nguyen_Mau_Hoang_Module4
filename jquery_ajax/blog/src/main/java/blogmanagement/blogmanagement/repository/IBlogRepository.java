@@ -22,6 +22,7 @@ public interface IBlogRepository extends JpaRepository<Blog, Integer> {
     List<BlogDto> showListDto();
 
     List<Blog> findByCategory(Category category);
+
     @Query(value = "select * from Blog", nativeQuery = true)
     Page<Blog> findPageable(Pageable pageable);
 

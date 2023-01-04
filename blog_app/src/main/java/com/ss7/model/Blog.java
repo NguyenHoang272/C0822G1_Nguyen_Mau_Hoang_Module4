@@ -13,7 +13,7 @@ public class Blog {
     private String content;
     private String author;
     private String writingDate;
-    
+
     @ManyToOne(cascade = CascadeType.REMOVE)
     private Category category;
 

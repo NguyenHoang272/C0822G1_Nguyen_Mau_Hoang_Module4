@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface IEmployeeService {
     Page<Employee> findAll(Pageable pageable);
+
     List<Employee> getListEmployee();
 }

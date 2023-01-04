@@ -13,39 +13,40 @@
 <h4 th:if="${message}">
     <span style="text-align: center" th:text="${message}"></span>
 </h4>
-<div style="background: forestgreen; height: 350px;width: 350px; margin-left: 50px; margin-top: 50px" class="row g-3 align-items-center">
-<form th:action="@{/create}" method="post" th:object="${songDto}">
-    <table class="table-primary">
-        <h4>Create New Song</h4><br>
-        <tr>
-            <td>Title</td>
-            <td>
-                <input  type="text" th:field="*{title}">
-                <p style="clor:red" th:errors="*{title}"></p>
-            </td>
-        </tr>
+<div style="background: forestgreen; height: 350px;width: 350px; margin-left: 50px; margin-top: 50px"
+     class="row g-3 align-items-center">
+    <form th:action="@{/create}" method="post" th:object="${songDto}">
+        <table class="table-primary">
+            <h4>Create New Song</h4><br>
+            <tr>
+                <td>Title</td>
+                <td>
+                    <input type="text" th:field="*{title}">
+                    <p style="clor:red" th:errors="*{title}"></p>
+                </td>
+            </tr>
 
-        <tr>
-            <td>Artist</td>
-            <td>
-                <input type="text" th:field="*{artist}">
-                <p style="clor:red" th:errors="*{artist}"></p>
-            </td>
-        </tr>
+            <tr>
+                <td>Artist</td>
+                <td>
+                    <input type="text" th:field="*{artist}">
+                    <p style="clor:red" th:errors="*{artist}"></p>
+                </td>
+            </tr>
 
-        <tr>
-            <td>Kind Of Music</td>
-            <td>
-                <input type="text" th:field="*{kindOfMusic}">
-                <p style="clor:red"  th:errors="*{kindOfMusic}"></p>
-            </td>
-        </tr>
+            <tr>
+                <td>Kind Of Music</td>
+                <td>
+                    <input type="text" th:field="*{kindOfMusic}">
+                    <p style="clor:red" th:errors="*{kindOfMusic}"></p>
+                </td>
+            </tr>
 
-        <tr>
-            <td><input  type="submit" class="btn btn-primary" value="Save"></td>
-        </tr>
-    </table>
-</form>
+            <tr>
+                <td><input type="submit" class="btn btn-primary" value="Save"></td>
+            </tr>
+        </table>
+    </form>
     <a href="/" style="text-align: center; color: black">Back to list</a>
 </div>
 </body>

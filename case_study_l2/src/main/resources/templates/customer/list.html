@@ -121,9 +121,9 @@
                     </li>
                 </ul>
                 <form action="/customers" style="display: flex">
-                    <input  class="input-group-text"  type="text" name="nameSearch" placeholder="Search name">
-                    <input  class="input-group-text"  type="text" name="email" placeholder="Search email">
-                    <select class="input-group-text"  name="customerType">
+                    <input class="input-group-text" type="text" name="nameSearch" placeholder="Search name">
+                    <input class="input-group-text" type="text" name="email" placeholder="Search email">
+                    <select class="input-group-text" name="customerType">
                         <option value="" selected>Type</option>
                         <option th:each="item: ${customerTypes}" th:value="${item.id}"
                                 th:text="${item.name}"></option>

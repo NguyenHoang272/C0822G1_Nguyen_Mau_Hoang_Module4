@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class SongService implements ISongService{
+public class SongService implements ISongService {
     @Autowired
     private ISongRepository songRepository;
+
     @Override
     public Page<Song> finAll(Pageable pageable) {
         return songRepository.findAll(pageable);
