@@ -28,16 +28,16 @@ import java.util.function.Function;
 @RequestMapping("/contract")
 public class ContractController {
     @Autowired
-    IContractService contractService;
+    private IContractService contractService;
 
     @Autowired
-    IFacilityService facilityService;
+    private IFacilityService facilityService;
 
     @Autowired
-    IEmployeeService employeeService;
+    private IEmployeeService employeeService;
 
     @Autowired
-    ICustomerService customerService;
+    private ICustomerService customerService;
 
     @ModelAttribute("attachFacilityList")
     public List<AttachFacility> getListAttachFacility() {

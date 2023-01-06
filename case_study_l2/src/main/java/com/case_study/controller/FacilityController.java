@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("facility")
 public class FacilityController {
     @Autowired
-    IFacilityService facilityService;
+    private IFacilityService facilityService;
 
     @ModelAttribute("facilityTypeList")
     public List<FacilityType> getListFacilityTypes() {

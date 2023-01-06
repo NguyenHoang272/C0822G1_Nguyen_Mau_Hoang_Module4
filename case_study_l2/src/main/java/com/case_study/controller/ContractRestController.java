@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/contract/v1")
 public class ContractRestController {
     @Autowired
-    IFacilityService facilityService;
+    private IFacilityService facilityService;
 
     @GetMapping("/{id}")
     public ResponseEntity<Facility> getFacilityById(@PathVariable int id) {

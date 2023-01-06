@@ -16,11 +16,11 @@ import java.util.List;
 @Service
 public class FacilityService implements IFacilityService {
     @Autowired
-    FacilityRepository facilityRepository;
+    private FacilityRepository facilityRepository;
     @Autowired
-    FacilityTypeRepository facilityTypeRepository;
+    private  FacilityTypeRepository facilityTypeRepository;
     @Autowired
-    RentTypeRepository rentTypeRepository;
+    private RentTypeRepository rentTypeRepository;
 
 
     @Override

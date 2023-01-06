@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api/contract-detail/v1")
 public class ContractDetailRestController {
     @Autowired
-    IContractService contractService;
+    private IContractService contractService;
 
     @GetMapping("contract-detail/{contractId}")
     public ResponseEntity<List<ContractDetail>> getListContractDetail(@PathVariable int contractId) {
