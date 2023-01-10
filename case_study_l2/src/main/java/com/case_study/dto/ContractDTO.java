@@ -10,6 +10,7 @@ import org.springframework.validation.Validator;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 public class ContractDTO implements Validator {
@@ -21,6 +22,7 @@ public class ContractDTO implements Validator {
 
     @Min(0)
     @NotNull
+    @Min(value = 0,message = "Must be greater than 0")
     private double deposit;
 
     private int deleteStatus = 1;

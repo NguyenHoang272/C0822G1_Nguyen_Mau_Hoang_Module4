@@ -9,14 +9,23 @@ import javax.validation.constraints.NotBlank;
 
 public class FacilityDTO implements Validator {
     private int id;
+    @NotBlank(message = "Not empty")
     private String name;
+    @NotBlank(message = "Not empty")
     private int area;
+    @NotBlank(message = "Not empty")
     private double cost;
+    @NotBlank(message = "Not empty")
     private int maxPeople;
+    @NotBlank(message = "Not empty")
     private String standardRoom;
+    @NotBlank(message = "Not empty")
     private String descriptionOtherConvenience;
+    @NotBlank(message = "Not empty")
     private double poolArea;
+    @NotBlank(message = "Not empty")
     private int numberFloors;
+    @NotBlank(message = "Not empty")
     private String facilityFree;
     private int deleteStatus = 1;
     private RentType rentTypeId;
@@ -153,5 +162,11 @@ public class FacilityDTO implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         FacilityDTO facilityDTO = (FacilityDTO) target;
+        if (facilityDTO.numberFloors < 0) {
+            errors.rejectValue("numberFloors", "numberFloors.errors", "numberFloors not format");
+        }
+        if (facilityDTO.cost < 0) {
+            errors.rejectValue("cost", "cost.errors", "cost not format");
+        }
     }
 }
